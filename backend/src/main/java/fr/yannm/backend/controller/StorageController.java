@@ -1,0 +1,45 @@
+package fr.yannm.backend.controller;
+
+import fr.yannm.backend.service.storage.StorageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Yann
+ * @version 1.0
+ * @name : StorageController
+ * @created 25/02/2022 - 14:57
+ * @project backend
+ * @copyright Yann
+ **/
+@CrossOrigin
+@RestController
+public class StorageController {
+
+    @Autowired
+    private StorageService storageService;
+
+    @GetMapping("storages")
+    public ResponseEntity<?> getStorages(){
+        return storageService.getStorages();
+    }
+
+    @GetMapping("storageById/{id}")
+    public ResponseEntity<?> getStorageById(@PathVariable("id") Long id){
+        return storageService.getStorageById(id);
+    }
+
+    @GetMapping("storageBySlug/{slug}")
+    public ResponseEntity<?> getStorageBySlug(@PathVariable("slug") String slug){
+        return storageService.getStorageBySlug(slug);
+    }
+
+
+
+
+
+}
