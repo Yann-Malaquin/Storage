@@ -67,8 +67,8 @@ public class StorageService implements StorageServiceItf {
     }
 
     @Override
-    public ResponseEntity<?> updateStorage(Long id,
-                                           UpdateStorage updateStorage) {
+    public ResponseEntity<?> updateStorageById(Long id,
+                                               UpdateStorage updateStorage) {
 
         if (storageRepository.existsByName(updateStorage.getName())) {
 
@@ -85,6 +85,19 @@ public class StorageService implements StorageServiceItf {
             storageToUpdate.setSlug(Slug.makeSlug(updateStorage.getName()));
 
             return ResponseEntity.status(HttpStatus.OK).body(storageRepository.save(storageToUpdate));
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Storage does not exist !");
+    }
+
+    @Override
+    public ResponseEntity<?> deleteStorageById(Long id) {
+
+        Optional<Storage> storageOptional = storageRepository.findById(id);
+
+        if (storageOptional.isPresent()) {
+            storageRepository.delete(storageOptional.get());
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Storage does not exist !");

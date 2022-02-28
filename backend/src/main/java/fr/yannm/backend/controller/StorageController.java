@@ -46,7 +46,12 @@ public class StorageController {
     @PutMapping("updateStorageById/{id}")
     public ResponseEntity<?> updateStorageById(@PathVariable("id") Long id,
                                                @Validated @RequestBody UpdateStorage updateStorage) {
-        return storageService.updateStorage(id, updateStorage);
+        return storageService.updateStorageById(id, updateStorage);
+    }
+
+    @DeleteMapping("deleteStorageById/{id}")
+    public ResponseEntity<?> deleteStorageById(@PathVariable("id") Long id) {
+        return storageService.deleteStorageById(id);
     }
 
 }
