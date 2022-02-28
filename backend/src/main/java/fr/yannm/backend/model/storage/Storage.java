@@ -2,12 +2,14 @@ package fr.yannm.backend.model.storage;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.yannm.backend.model.product.Product;
+import fr.yannm.backend.utility.Slug;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,4 +40,10 @@ public class Storage {
     @JsonIgnoreProperties("storage")
     private List<Product> productList;
 
+    public Storage(String name) {
+        super();
+        this.name = name;
+        this.slug = Slug.makeSlug(this.name);
+        this.productList = new ArrayList<>();
+    }
 }

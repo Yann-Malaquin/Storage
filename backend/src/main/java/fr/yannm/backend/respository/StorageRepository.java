@@ -21,4 +21,6 @@ public interface StorageRepository extends JpaRepository<Storage, Long> {
 
     Boolean existsBySlug(String slug);
 
+    Boolean existsByName(String name);
+
 }
