@@ -1,7 +1,7 @@
 package fr.yannm.backend.controller;
 
 import fr.yannm.backend.model.storage.CreateStorage;
-import fr.yannm.backend.model.storage.Storage;
+import fr.yannm.backend.model.storage.UpdateStorage;
 import fr.yannm.backend.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +24,29 @@ public class StorageController {
     private StorageService storageService;
 
     @GetMapping("storages")
-    public ResponseEntity<?> getStorages(){
+    public ResponseEntity<?> getStorages() {
         return storageService.getStorages();
     }
 
     @GetMapping("storageById/{id}")
-    public ResponseEntity<?> getStorageById(@PathVariable("id") Long id){
+    public ResponseEntity<?> getStorageById(@PathVariable("id") Long id) {
         return storageService.getStorageById(id);
     }
 
     @GetMapping("storageBySlug/{slug}")
-    public ResponseEntity<?> getStorageBySlug(@PathVariable("slug") String slug){
+    public ResponseEntity<?> getStorageBySlug(@PathVariable("slug") String slug) {
         return storageService.getStorageBySlug(slug);
     }
 
     @PostMapping("newStorage")
-    public ResponseEntity<?> newStorage(@Validated @RequestBody CreateStorage createStorage){
+    public ResponseEntity<?> newStorage(@Validated @RequestBody CreateStorage createStorage) {
         return storageService.createStorage(createStorage);
+    }
+
+    @PutMapping("updateStorageById/{id}")
+    public ResponseEntity<?> updateStorageById(@PathVariable("id") Long id,
+                                               @Validated @RequestBody UpdateStorage updateStorage) {
+        return storageService.updateStorage(id, updateStorage);
     }
 
 }

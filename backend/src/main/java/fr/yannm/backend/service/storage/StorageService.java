@@ -2,6 +2,7 @@ package fr.yannm.backend.service.storage;
 
 import fr.yannm.backend.model.storage.CreateStorage;
 import fr.yannm.backend.model.storage.Storage;
+import fr.yannm.backend.model.storage.UpdateStorage;
 import fr.yannm.backend.respository.StorageRepository;
 import fr.yannm.backend.utility.Slug;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author Yann
@@ -63,6 +64,29 @@ public class StorageService implements StorageServiceItf {
         return ResponseEntity.status(HttpStatus.CREATED).body(storageRepository.save(new Storage(
                 createStorage.getName()
         )));
+    }
 
+    @Override
+    public ResponseEntity<?> updateStorage(Long id,
+                                           UpdateStorage updateStorage) {
+
+        if (storageRepository.existsByName(updateStorage.getName())) {
+
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Storage already exists !");
+        }
+
+        Optional<Storage> storageOptional = storageRepository.findById(id);
+        Storage storageToUpdate = null;
+
+        if (storageOptional.isPresent()) {
+
+            storageToUpdate = storageOptional.get();
+            storageToUpdate.setName(updateStorage.getName());
+            storageToUpdate.setSlug(Slug.makeSlug(updateStorage.getName()));
+
+            return ResponseEntity.status(HttpStatus.OK).body(storageRepository.save(storageToUpdate));
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Storage does not exist !");
     }
 }
