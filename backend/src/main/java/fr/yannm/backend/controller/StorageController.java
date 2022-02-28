@@ -1,12 +1,12 @@
 package fr.yannm.backend.controller;
 
+import fr.yannm.backend.model.storage.CreateStorage;
+import fr.yannm.backend.model.storage.Storage;
 import fr.yannm.backend.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Yann
@@ -38,8 +38,9 @@ public class StorageController {
         return storageService.getStorageBySlug(slug);
     }
 
-
-
-
+    @PostMapping("newStorage")
+    public ResponseEntity<?> newStorage(@Validated @RequestBody CreateStorage createStorage){
+        return storageService.createStorage(createStorage);
+    }
 
 }

@@ -1,5 +1,6 @@
 package fr.yannm.backend.service.storage;
 
+import fr.yannm.backend.model.storage.CreateStorage;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -17,5 +18,7 @@ public interface StorageServiceItf {
     public ResponseEntity<?> getStorageById(Long id);
 
     public ResponseEntity<?> getStorageBySlug(String slug);
+
+    public ResponseEntity<?> createStorage(CreateStorage createStorage);
 
 }
