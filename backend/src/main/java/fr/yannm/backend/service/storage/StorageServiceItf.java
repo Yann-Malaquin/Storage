@@ -22,6 +22,8 @@ public interface StorageServiceItf {
 
     public ResponseEntity<?> createStorage(CreateStorage createStorage);
 
-    public ResponseEntity<?> updateStorage(Long id, UpdateStorage updateStorage);
+    public ResponseEntity<?> updateStorageById(Long id, UpdateStorage updateStorage);
+
+    public ResponseEntity<?> deleteStorageById(Long id);
 
 }
