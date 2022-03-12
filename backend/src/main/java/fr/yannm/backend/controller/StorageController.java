@@ -43,7 +43,7 @@ public class StorageController {
         return storageService.createStorage(createStorage);
     }
 
-    @PutMapping("updateStorageById/{id}")
+    @PatchMapping("updateStorageById/{id}")
     public ResponseEntity<?> updateStorageById(@PathVariable("id") Long id,
                                                @Validated @RequestBody UpdateStorage updateStorage) {
         return storageService.updateStorageById(id, updateStorage);

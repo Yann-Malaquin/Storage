@@ -1,5 +1,9 @@
 package fr.yannm.backend.service.product;
 
+import fr.yannm.backend.model.product.CreateProduct;
+import fr.yannm.backend.model.product.UpdateProduct;
+import fr.yannm.backend.model.storage.CreateStorage;
+import fr.yannm.backend.model.storage.UpdateStorage;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -17,5 +21,11 @@ public interface ProductServiceItf {
     public ResponseEntity<?> getProductBySlug(String slug);
 
     public ResponseEntity<?> getProductsByStorage(Long id);
+
+    public ResponseEntity<?> createProduct(CreateProduct createProduct);
+
+    public ResponseEntity<?> updateProductById(Long id, UpdateProduct updateProduct);
+
+    public ResponseEntity<?> deleteProductById(Long id);
 
 }

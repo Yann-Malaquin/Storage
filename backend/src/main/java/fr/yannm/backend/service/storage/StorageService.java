@@ -70,13 +70,13 @@ public class StorageService implements StorageServiceItf {
     public ResponseEntity<?> updateStorageById(Long id,
                                                UpdateStorage updateStorage) {
 
-        if (storageRepository.existsByName(updateStorage.getName())) {
+        Optional<Storage> storageOptional = storageRepository.findById(id);
+        Storage storageToUpdate = null;
+
+        if (!storageRepository.findByName(updateStorage.getName()).equals(storageOptional)) {
 
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Storage already exists !");
         }
-
-        Optional<Storage> storageOptional = storageRepository.findById(id);
-        Storage storageToUpdate = null;
 
         if (storageOptional.isPresent()) {
 

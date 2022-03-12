@@ -1,12 +1,13 @@
 package fr.yannm.backend.controller;
 
+import fr.yannm.backend.model.product.CreateProduct;
+import fr.yannm.backend.model.product.UpdateProduct;
+import fr.yannm.backend.model.storage.UpdateStorage;
 import fr.yannm.backend.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Yann
@@ -36,5 +37,21 @@ public class ProductController {
     @GetMapping("productByStorage/{id}")
     public ResponseEntity<?> getProductByStorage(@PathVariable("id") Long id) {
         return productService.getProductsByStorage(id);
+    }
+
+    @PostMapping("newProduct")
+    public ResponseEntity<?> newProduct(@Validated @RequestBody CreateProduct createProduct) {
+        return productService.createProduct(createProduct);
+    }
+
+    @PatchMapping("updateProductById/{id}")
+    public ResponseEntity<?> updateStorageById(@PathVariable("id") Long id,
+                                               @Validated @RequestBody UpdateProduct updateProduct) {
+        return productService.updateProductById(id, updateProduct);
+    }
+
+    @DeleteMapping("deleteProductById/{id}")
+    public ResponseEntity<?> deleteProductById(@PathVariable("id") Long id) {
+        return productService.deleteProductById(id);
     }
 }

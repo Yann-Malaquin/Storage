@@ -18,6 +18,7 @@ import java.util.Optional;
 public interface StorageRepository extends JpaRepository<Storage, Long> {
 
     Optional<Storage> findBySlug(String slug);
+    Optional<Storage> findByName(String name);
 
     Boolean existsBySlug(String slug);
 

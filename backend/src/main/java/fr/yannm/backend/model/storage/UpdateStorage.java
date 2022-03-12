@@ -13,12 +13,12 @@ import lombok.Setter;
  * @project backend
  * @copyright Yann
  **/
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateStorage {
 
+    @Getter
+    @Setter
     private String name;
 
 }

@@ -14,12 +14,13 @@ import lombok.Setter;
  * @copyright Yann
  **/
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateStorage {
 
+    @Getter
+    @Setter
     private String name;
 
 }
