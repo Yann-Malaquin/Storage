@@ -2,12 +2,14 @@ package fr.yannm.backend.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.yannm.backend.model.storage.Storage;
+import fr.yannm.backend.utility.Slug;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 /**
  * @author Yann
@@ -19,27 +21,41 @@ import javax.persistence.*;
  **/
 @Entity
 @Table(name = "products")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String name;
 
+    @Getter
+    @Setter
     private int quantity;
 
+    @Getter
+    @Setter
     private String slug;
 
     @ManyToOne
     @JoinColumn(name = "storage_id")
     @JsonIgnoreProperties("productList")
+    @Getter
+    @Setter
     private Storage storage;
 
-
+    public Product(String name, int quantity, Storage storage) {
+        super();
+        this.name = name;
+        this.quantity = quantity;
+        this.slug = Slug.makeSlug(this.name);
+        this.storage = storage;
+    }
 
 }

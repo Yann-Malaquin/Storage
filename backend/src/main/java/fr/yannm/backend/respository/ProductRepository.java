@@ -23,5 +23,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findProductsByStorage(Storage storage);
 
+    Optional<Product> findByName(String name);
+
     Boolean existsBySlug(String slug);
+
+    Boolean existsByName(String name);
 }

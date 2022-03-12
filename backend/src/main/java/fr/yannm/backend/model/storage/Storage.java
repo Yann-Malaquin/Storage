@@ -22,22 +22,28 @@ import java.util.List;
  **/
 @Entity
 @Table(name = "storages")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Storage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String name;
 
+    @Getter
+    @Setter
     private String slug;
 
     @OneToMany(mappedBy = "storage", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("storage")
+    @Getter
+    @Setter
     private List<Product> productList;
 
     public Storage(String name) {
