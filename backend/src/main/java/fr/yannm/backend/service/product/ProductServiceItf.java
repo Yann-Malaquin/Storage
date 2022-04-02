@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
  **/
 public interface ProductServiceItf {
 
+    public ResponseEntity<?> getProducts();
+
     public ResponseEntity<?> getProductById(Long id);
 
     public ResponseEntity<?> getProductBySlug(String slug);

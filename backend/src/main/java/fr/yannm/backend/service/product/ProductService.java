@@ -34,6 +34,16 @@ public class ProductService implements ProductServiceItf {
     private StorageRepository storageRepository;
 
     @Override
+    public ResponseEntity<?> getProducts() {
+        if (!productRepository.findAll().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(productRepository.findAll());
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("ProductList is empty");
+    }
+
+
+    @Override
     public ResponseEntity<?> getProductById(Long id) {
 
         if (productRepository.existsById(id)) {
